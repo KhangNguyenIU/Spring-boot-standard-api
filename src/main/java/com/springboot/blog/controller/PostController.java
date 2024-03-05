@@ -17,7 +17,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/posts")
+@RequestMapping()
 @Tag(
         name=" CRUD REST APIs for Post resources"
 )
@@ -31,7 +31,7 @@ public class PostController {
 
     // create blog post rest api
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping
+    @PostMapping("/api/v1/posts")
     @Operation(
             summary = "Create Post REST API",
             description = "Create Post REST API is used to save post into database"
@@ -48,7 +48,7 @@ public class PostController {
     }
 
     // get all posts rest api
-    @GetMapping
+    @GetMapping("/api/v1/posts")
 
     @Operation(
             summary = "Get All Posts REST API",
@@ -68,7 +68,7 @@ public class PostController {
     }
 
     // get post by id
-    @GetMapping("/{id}")
+    @GetMapping("/api/v1/posts/{id}")
     @Operation(
             summary = "Get Post By Id REST API",
             description = "Get Post By Id REST API is used to get single post from the database"
@@ -83,7 +83,7 @@ public class PostController {
 
     // update post by id rest api
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("/{id}")
+    @PutMapping("/api/v1/posts/{id}")
     @Operation(
             summary = "update Post REST API",
             description = "Update Post REST API is used to update a particular post in the database"
@@ -104,7 +104,7 @@ public class PostController {
 
     // delete post rest api
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/api/v1/posts/{id}")
     @SecurityRequirement(
             name="Bear Authentication"
     )
@@ -123,7 +123,7 @@ public class PostController {
         return new ResponseEntity<>("Post entity deleted successfully.", HttpStatus.OK);
     }
 
-    @GetMapping("/category/{id}")
+    @GetMapping("/api/v1/posts/category/{id}")
     public ResponseEntity<List<PostDto>> getPostsByCategory(@PathVariable("id") Long categoryId){
         List<PostDto> postDtos = postService.getPostsByCategory(categoryId);
         return ResponseEntity.ok(postDtos);

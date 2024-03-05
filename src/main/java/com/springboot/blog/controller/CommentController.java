@@ -12,7 +12,7 @@ import jakarta.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("/api/v1/")
 @Tag(
         name = " CRUD REST APIs for Comment resources"
 )
